@@ -41,7 +41,7 @@ end
 ### Beispiel 2
 
 function nearestindex(x::Vector{<:Real}, y::Real) :: Int
-    # Fuege hier deinen Loesungscode ein
+    
     return
 end
 
