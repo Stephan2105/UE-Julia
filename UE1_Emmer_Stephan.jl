@@ -9,6 +9,9 @@ Wichtig 2: Bitte nur die Funktionen ausprogrammieren und keine Funktionsaufrufe 
 ### Beispiel 1:
 
 function greatest(x::Vector{T}, k::Integer = 1) :: Vector{T} where {T <: Real}
+    # x ist ein beliebiger Zahlenvektor, dessen maximal Stellen man finden moechte
+    # k zeigt an, wie viele der groessten Stllen zurueckgegeben werden sollen
+
     # Fehlermeldung ausgeben wenn Bedingungen an k nicht erfuellt
     if k <= 0 || k > length(x)
         throw(ArgumentError("k muss groesser als 0 sein und kleiner bzw. gleich als die laenge von x"))
@@ -41,6 +44,9 @@ end
 ### Beispiel 2
 
 function nearestindex(x::Vector{<:Real}, y::Real) :: Int
+    # x ist ein beliebiger Zahlenvektor, wo man die Stelle des Elements mit dem gerinsgten Abstand zu einer Zahl haben moechte
+    # y ist die Zahl zu der der geringste Abstand gefunden werden soll
+
     # abstandsvektor indizieren
     abstand = []
 
@@ -65,8 +71,8 @@ function nearestindex(x::Vector{<:Real}, y::Real) :: Int
     # fuer den Fall, dass es mehrere minimale Abstaende gibt die Indizes samplen 
     ind = sample(gleich)
     
-    # x an der Stelle mit dem geringsten Abstand zurueckgeben
-    return x[ind]    
+    # die Stelle mit dem geringsten Abstand zurueckgeben
+    return ind  
 end
 
 
