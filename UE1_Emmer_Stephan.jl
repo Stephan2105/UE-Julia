@@ -79,7 +79,16 @@ end
 ### Beispiel 3
 
 function swap!(x::Vector, i::Integer, j::Integer) :: Nothing
-    # Fuege hier deinen Loesungscode ein
+    # X ist der Vektor in dem Positionen vertauscht werden sollen
+    # i erste Stelle die vertauscht werden soll
+    # j zweite Stelle die vertauscht werden soll
+
+    # zwischenspeichern eines Werts
+    res = x[i]
+    # einen Wert an die andere Stelle einfuegen
+    x[i] = x[j]
+    # zwischengespeicherten Wert an anderer Stelle einfuegen
+    X[j] = res
     return
 end
 
