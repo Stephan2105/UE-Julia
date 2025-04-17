@@ -41,8 +41,32 @@ end
 ### Beispiel 2
 
 function nearestindex(x::Vector{<:Real}, y::Real) :: Int
+    # abstandsvektor indizieren
+    abstand = []
+
+    # den abstand der einzelnen Elemente von x zu y berechnen
+    for i in 1:length(x)
+        abst = abs(x[i] - y)
+        push!(abstand, abst)
+    end
+
+    # den geringsten Abstand finden
+    indi = [findmin(abstand)][1]
+
+    # gleich indizieren
+    gleich = []
+    # die Stellen finden, wo der Abstand am geringsten ist
+    for i in 1:length(x)
+        if abstand[i] == indi
+            push!(gleich, i)
+        end
+    end
+
+    # fuer den Fall, dass es mehrere minimale Abstaende gibt die Indizes samplen 
+    ind = sample(gleich)
     
-    return
+    # x an der Stelle mit dem geringsten Abstand zurueckgeben
+    return x[ind]    
 end
 
 
