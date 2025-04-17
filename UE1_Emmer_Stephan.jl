@@ -57,7 +57,7 @@ function nearestindex(x::Vector{<:Real}, y::Real) :: Int
     end
 
     # den geringsten Abstand finden
-    indi = [findmin(abstand)][1]
+    indi = findmin(abstand)[1]
 
     # gleich indizieren
     gleich = []
