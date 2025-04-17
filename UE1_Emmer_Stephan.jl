@@ -88,12 +88,41 @@ function swap!(x::Vector, i::Integer, j::Integer) :: Nothing
     # einen Wert an die andere Stelle einfuegen
     x[i] = x[j]
     # zwischengespeicherten Wert an anderer Stelle einfuegen
-    X[j] = res
+    x[j] = res
     return
 end
 
 function bubblesort!(x::Vector{<:Real}; rev::Bool = false) :: Nothing
-    # Fuege hier deinen Loesungscode ein
+    # x ist der Vektor, der sortiert werden soll
+    # wenn rev = true, dann wird absteigend sortiert
+
+    # wenn rev = false absteigend sortieren
+    if rev == false
+        # Schleifendurchlauf außen um einen Wert mehrmals wechseln zu koennen
+        for j in 1:(length(x) - 1)
+            # Schleife um jeden Wert der groesser als sein Nachfolgender ist mit diesem zu wechseln
+            for i in 1:(length(x) - 1)
+                # Bedingung, dass der nachfolgende Wert kleiner ist
+                if x[i] > x[i + 1]
+                    # tausch der beiden Werte
+                     swap!(x, i, i + 1)
+                end
+            end
+        end
+    # Fall, dass rev = true
+    else
+        # Schleifendurchlauf außen um einen Wert mehrmals wechseln zu koennen
+        for j in 1:(length(x) - 1)
+            # Schleife um jeden Wert der kleiner als sein Nachfolgender ist mit diesem zu wechseln
+            for i in 1:(length(x) - 1)
+                # Bedingung, dass der nachfolgende Wert groesser ist
+                if x[i] < x[i + 1]
+                    # tausch der beiden Werte
+                     swap!(x, i, i + 1)
+                end
+            end
+        end
+    end
     return
 end
 
