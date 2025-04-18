@@ -1,4 +1,4 @@
-
+using StatsBase
 #=
 Fuege in dieses Template deine Loesungscodes ein.
 Wichtig 1: Die Datei gemaess der Namensrichtlinien benennen.
@@ -130,6 +130,7 @@ end
 ### Beispiel 4
 
 function canonicaltour(x::Vector{T}) :: Vector{T} where {T <: Integer}
+    # x ist der Vektor fuer den eine Route mit den Vorrausetzungen aus der Angabe gebildet werden soll
     # y ist der sortierte Vektor von x
     y = sort(x)
 
@@ -215,7 +216,32 @@ end
 ### Beispiel 5
 
 function distance(x::Vector{<:Real}, y::Vector{<:Real}; p::Real = 2)
-    # Fuege hier deinen Loesungscode ein
-    return
+    # x und y sind die Vektoren deren Abstand bestimmt werden soll
+    # p ist die Norm, die verwendet werden soll
+
+    # Fehlermeldung wenn x und y nicht dieslbe laenge haben
+    if length(y) != length(x)
+        throw(ArgumentError("x und y haben nicht dieslebe laenge"))
+    end
+
+    # Fehlermeldung wenn p <= 0
+    if p <= 0
+        throw(ArgumentError("p muss > 0 sein"))
+    end
+
+    # subtraktionsvektor initialsieren
+    subvek = []
+    # die absoluten abstaende hoch p zwischen x und y in einen vektor einfuegen
+    for i in 1:length(x)
+        subi = (abs(x[i] - y[i]))^p
+        push!(subvek, subi)
+    end
+
+    # die summe der abstaende bestimmen
+    summe = sum(subvek)
+    # die pte Wurzel ziehen
+    res = summe^(1 / p)
+    
+    return res
 end
 
