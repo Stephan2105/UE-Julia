@@ -130,8 +130,85 @@ end
 ### Beispiel 4
 
 function canonicaltour(x::Vector{T}) :: Vector{T} where {T <: Integer}
-    # Fuege hier deinen Loesungscode ein
-    return
+    # y ist der sortierte Vektor von x
+    y = sort(x)
+
+    # durch die laenge von y durchiterieren
+    for i in 1:length(y)
+        # sollte y an der iten Stelle ungleich i sein, dann liegt keine Permuatation der Zahlen 1 bis length(x) vor
+        if i != y[i]
+            throw(ArgumentError("x ist keine Permutation der Zahlen 1 bis length(x)"))
+        end
+    end
+
+    # Stelle mit der 1 finden
+    stell = findmin(x)[2]
+    
+    if stell == 1
+        # wenn 1 am Anfang des Vektors ist
+        # die Zahlen davor und danach bzw danach und am Ende ansehen und die kleinere waehlen
+        hilfs = [x[2], x[length(x)]]
+        indikator = findmin(hilfs)[2]
+        
+        if indikator == 1
+            #Variante 1: indikator = 1
+            # wenn die kleinere Zahl danach ist
+            # dann ist der vektor selbst die Loesung
+            res = x
+        
+        else        
+            # Variante 2 indikator = 2
+            # wenn die kleinere Zahl die daor bzw am Ende ist
+            # dann ist die erste Zahl und dann die anderen rueckwaerts die Loesung
+            res = [x[1]]
+            res2 = reverse(x[2:length(x)])
+            append!(res, res2)
+        end
+
+    elseif stell == length(x)
+        # wenn die 1 am Ende des Vektors ist
+        # dann muss man die Zahl davor und die am Anfang des Vektors untersuchen
+        hilfs = [x[1], x[length(x) - 1]]
+        indikator = findmin(hilfs)[2]
+        
+        if indikator == 1
+            # Variante 1: indikator = 1
+            # wenn die kleinere Zahl die am Anfang des Vektors ist
+            # dann ist die letzte Zahl und dann der Vektor von der 1. bis zu vorletzten Stelle die Loesung
+            res = [x[length(x)]]
+            res2 = x[1:(length(x)- 1)]
+            append!(res, res2)
+    
+        else
+            # Variante 2: indikator = 2
+            # wenn die kleinere Zahl davor kommt
+            # dann ist der Vektor rueckwaerts die Loesung
+            res = reverse(x)
+        end
+
+    else
+        # wenn 1 in der mitte des Vektors
+        # dann muss die Zahl davor und die danach untersucht werden
+        hilfs = [x[stell - 1], x[stell + 1]]
+        indikator = findmin(hilfs)[2]
+    
+        if indikator == 1
+            # variante 1: indikator = 1
+            # sollte die kleinere Zahl zuvor kommen
+            # dann ist die 1 und bis zur 1. Stelle rueckwaerts und dann das Ende des Vektors bis eins vor der 1 rueckwaerts die Loesung
+            res = reverse(x[1:stell])
+            res2 =  reverse(x[(stell + 1):length(x)])
+            append!(res, res2)
+    
+        else
+            # sollte die kleinere Zahl danach kommen
+            # dann ist die 1 bis zur letzten Stelle und die erste Stelle bis eine Stelle vor der 1 die Loesung
+            res = x[stell: length(x)]
+            res2 = x[1:(stell - 1)]
+            append!(res, res2)
+        end
+    end
+    return res
 end
 
 
